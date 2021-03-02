@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Weather</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+	<body>
+		<div class="container">
+			<div class="text-center">
+                <h1 class="currentLocation"></h1>
+
+                
+                <div class="box" id="app">
+                    
+                    <div class="search-box">
+    
+                        <input type="text" class="form-control" placeholder="Search..." v-model="query">
+    
+                    </div>
+
+                    <div class="weather-box">
+                        <br><h1 class="weather">{{info.name}} , {{info.sys.country}}</h1> 
+                                      
+                        <h2 class="temp">{{ Math.round(info.main.temp) }}°C</h2>
+
+                        <img v-if="info.weather[0].main == 'Clear' " class="sun" src="images/sun.png" alt="">
+                        <img v-if="info.weather[0].main == 'Snow' " class="sun" src="images/snow.png" alt="">
+                        <img v-if="info.weather[0].main == 'Rain' " class="sun" src="images/rain.png" alt="">
+                        <img v-if="info.weather[0].main == 'Clouds' " class="sun" src="images/cloud.png" alt="">
+                        <img v-if="info.weather[0].main == 'Fog' " class="sun" src="images/fog.png" alt="">
+                        <img v-if="info.weather[0].main == 'Mist' " class="sun" src="images/mist.png" alt="">
+
+                        <h2 class="weather">{{info.weather[0].main}} , {{info.weather[0].description}}</h2>  <br>
+
+                        <div class="col-lg-6">
+
+                            <div class="temp">Humidity : {{ Math.round(info.main.humidity) }}</div>
+
+                        </div>   
+
+                        <div class="col-lg-6">
+
+                            <div class="temp">Pressure : {{ Math.round(info.main.pressure) }} hPa</div>
+                        </div>   <br><br> 
+
+                        <div class="col-lg-4">
+
+                            <div class="weather">Wind : {{info.wind.speed}} km/h</div>   
+          
+                        </div>
+                        <div class="col-lg-4">
+    
+                            <div class="weather">Longitude : {{info.coord.lon}}</div> 
+    
+                        </div>
+                        <div class="col-lg-4">    
+                            <div class="weather">Latitude : {{info.coord.lat}}</div>               
+                        </div>
+
+                        <br><br><br>
+
+                        <marquee behavior="" direction="">
+
+                            <div class="marquee">
+                                
+                                {{info.name}} , 
+                                {{info.sys.country}} ,
+                                {{ Math.round(info.main.temp) }}°C ,
+                                {{info.weather[0].main}} Sky , 
+                                {{info.weather[0].description}} , 
+                                Humidity : {{ Math.round(info.main.humidity) }} , 
+                                Pressure : {{ Math.round(info.main.pressure) }} hPa , 
+                                Wind : {{info.wind.speed}} m/s , 
+                                Longitude : {{info.coord.lon}} , 
+                                Latitude : {{info.coord.lat}} 
+                                
+
+                            </div> 
+
+                        </marquee>
+
+                     </div>
+
+                </div>
+			</div> 
+        </div> 
+        
+    </body>
+    
+
+
+<script src="vue.js"></script>
+<script>
+
+    var vm = new Vue({
+
+   
+        el:'#app',
+    
+
+    // name:'App',
+
+    data(){
+        return{
+
+        query: 'moscow',
+        info:{}
+
+        } 
+    },
+    mounted(){
+
+        
+    },
+    
+    mounted(){
+
+            axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.query}&units=metric&APPID=31d12ed7300be09fe6cb37ea187d3253`) 
+            
+            .then(response => (this.info = response.data))
+            .catch(err => console.log('Request Failed', err))
+
+  
+
+    }
+    
+
+
+})
+
+
+</script>
+
+</html>

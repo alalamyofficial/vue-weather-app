@@ -1,0 +1,35 @@
+.weather-box{
+
+    /* background-color: cornflowerblue; */
+    width: 700px;
+    height: 400px;
+    box-shadow: 21px 20px 5px -2px rgba(0,0,0,0.16);
+    -webkit-box-shadow: 21px 20px 5px -2px rgba(0,0,0,0.16);
+    -moz-box-shadow: 21px 20px 5px -2px rgba(0,0,0,0.16);
+    color: aqua;
+    background-color: #505171;
+    margin-left: 192px;
+}
+body{
+
+    color: antiquewhite;
+    background-color:#303861
+}
+.marquee{
+
+    background-color: #18202d;
+
+    width: 892px;
+
+    color: indianred;
+}
+
+.sun{
+
+    width: 50px;
+}
+.form-control{
+
+    width: 702px;
+    margin-left: 191px;
+}
